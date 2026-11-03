@@ -1,0 +1,15 @@
+name: CoreProtectExporter
+version: 1.0.1
+main: tw.codex.coreprotectexporter.CoreProtectExporter
+api-version: '26.2'
+depend: [CoreProtect]
+description: Export a single CoreProtect lookup into split TSV files.
+commands:
+  coexport:
+    description: Export one CoreProtect lookup to files.
+    usage: /coexport time:30d action:+block include:end_crystal radius:100 center:<player>
+    permission: coreprotectexport.use
+permissions:
+  coreprotectexport.use:
+    description: Run CoreProtect lookup exports.
+    default: op
