@@ -1,7 +1,7 @@
 name: CoreProtectExporter
-version: 1.0.1
+version: '${project.version}'
 main: tw.codex.coreprotectexporter.CoreProtectExporter
-api-version: '26.2'
+api-version: '${minecraft.version}'
 depend: [CoreProtect]
 description: Export a single CoreProtect lookup into split TSV files.
 commands:

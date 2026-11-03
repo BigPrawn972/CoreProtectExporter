@@ -1,3 +1,5 @@
 /build/
+/target/
+/.build-deps/
 *.class
 /CoreProtectExporter-1.0.0.jar

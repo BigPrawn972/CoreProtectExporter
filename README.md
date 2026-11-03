@@ -2,6 +2,8 @@
 
 A separate companion plugin for exporting CoreProtect lookup results to UTF-8 TSV files. It does not modify or include CoreProtect source code or its JAR.
 
+This repository can build variants for Paper 26.2 and Paper 26.3. Use the JAR matching the server version. The 26.3 JAR is ready, but it cannot operate until the installed CoreProtect release supports 26.3.
+
 ## Features
 
 - Runs one CoreProtect API lookup and writes the returned rows to files under `plugins/CoreProtect/exports/`.
@@ -13,8 +15,8 @@ A separate companion plugin for exporting CoreProtect lookup results to UTF-8 TS
 
 ## Requirements
 
-- Paper 26.2 or a compatible server exposing Bukkit API 26.2.
-- CoreProtect 24.1 or a compatible CoreProtect API v10+ implementation.
+- Paper 26.2 or 26.3; use the matching build profile.
+- A CoreProtect build that supports the server's Minecraft version and exposes API v10 or newer. CoreProtect CE 24.1 works on the current Paper 26.2 server, but disables itself on Paper 26.3 with `Minecraft 26.3 is not supported`.
 - Java 25 to build this project.
 
 CoreProtect is developed by [PlayPro](https://github.com/PlayPro/CoreProtect). This plugin calls its public API and does not redistribute CoreProtect. See the [CoreProtect API documentation](https://github.com/PlayPro/CoreProtect/blob/master/docs/api/version/v10.md) and [Artistic License 2.0](https://github.com/PlayPro/CoreProtect/blob/master/LICENSE). CoreProtect is a separate project; this plugin is not affiliated with or endorsed by PlayPro.
@@ -22,7 +24,7 @@ CoreProtect is developed by [PlayPro](https://github.com/PlayPro/CoreProtect). T
 ## Install
 
 1. Install CoreProtect on the Paper server.
-2. Copy `CoreProtectExporter-1.0.1.jar` into the server's `plugins/` directory.
+2. Copy the matching `CoreProtectExporter-1.0.2-paper-26.2.jar` or `CoreProtectExporter-1.0.2-paper-26.3.jar` into the server's `plugins/` directory. The 26.3 build also requires a CoreProtect version that supports Minecraft 26.3.
 3. Restart the server.
 4. Grant `coreprotectexport.use` to users allowed to export. The permission defaults to operators.
 
@@ -60,13 +62,19 @@ Each TSV has a header and metadata comments for the query, generation time, part
 
 ## Build
 
-With Maven installed, run:
+With Maven installed, build the Paper 26.2 variant with:
 
 ```text
-mvn package
+mvn "-Ppaper-26.2" "-Dmaven.test.skip=true" package
 ```
 
-The built plugin will be written to `target/CoreProtectExporter-1.0.1.jar`.
+Build the Paper 26.3 variant with:
+
+```text
+mvn "-Ppaper-26.3" "-Dmaven.test.skip=true" package
+```
+
+The corresponding JAR is written under `target/`. The Maven profile selects the matching Paper API and `api-version` metadata.
 
 ## Source and license
 

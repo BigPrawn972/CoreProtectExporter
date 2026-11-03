@@ -6,7 +6,7 @@
 
     <groupId>tw.codex</groupId>
     <artifactId>coreprotect-exporter</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <packaging>jar</packaging>
 
     <name>CoreProtectExporter</name>
@@ -15,6 +15,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>25</maven.compiler.release>
+        <paper.api.version>26.2.build.135-stable</paper.api.version>
+        <minecraft.version>26.2</minecraft.version>
     </properties>
 
     <repositories>
@@ -32,7 +34,7 @@
         <dependency>
             <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
-            <version>26.2.build.135-stable</version>
+            <version>${paper.api.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -44,7 +46,17 @@
     </dependencies>
 
     <build>
-        <finalName>CoreProtectExporter-${project.version}</finalName>
+        <sourceDirectory>${project.basedir}/src</sourceDirectory>
+        <finalName>CoreProtectExporter-${project.version}-paper-${minecraft.version}</finalName>
+        <resources>
+            <resource>
+                <directory>${project.basedir}</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>plugin.yml</include>
+                </includes>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -53,4 +65,24 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>paper-26.2</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <paper.api.version>26.2.build.135-stable</paper.api.version>
+                <minecraft.version>26.2</minecraft.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>paper-26.3</id>
+            <properties>
+                <paper.api.version>26.3.build.238-stable</paper.api.version>
+                <minecraft.version>26.3</minecraft.version>
+            </properties>
+        </profile>
+    </profiles>
 </project>
